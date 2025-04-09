@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Avaliação de Pacientes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container my-4 card p-4 shadow">
+    <h1 class="mb-4"> Avaliação de Pacientes</h1>
+    <form action="persistir_avaliacao.php" method="post">
+      <!-- Dados do Paciente -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="w-auto px-2">Dados do Paciente</legend>
+        <div class="mb-3">
+          <label for="paciente_id" class="form-label">ID do Paciente</label>
+          <input type="number" class="form-control" id="paciente_id" name="paciente_id" required>
+        </div>
+      </fieldset>
+
+      <!-- Informações Clínicas Básicas -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="w-auto px-2">Informações Clínicas Básicas</legend>
+        <div class="mb-3">
+          <label for="historico_doencas" class="form-label">Histórico de Doenças (Pessoal e Familiar)</label>
+          <textarea class="form-control" id="historico_doencas" name="historico_doencas" rows="3"></textarea>
+        </div>
+         <div class="mb-3">
+            <label for="tipo_diabetes" class="form-label">Tipo de Diabetes</label>
+              <select class="form-control" id="tipo_diabetes" name="tipo_diabetes">
+                  <option value="">Selecione o tipo</option>
+                  <option value="tipo1">Tipo 1</option>
+                  <option value="tipo2">Tipo 2</option>
+                  <option value="gestacional">Gestacional</option>                 
+              </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="tempo_diagnostico" class="form-label">Tempo de Diagnóstico (anos)</label>
+          <input type="number" class="form-control" id="tempo_diagnostico" name="tempo_diagnostico">
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="tratamento_insulina" name="tratamento_insulina">
+          <label class="form-check-label" for="tratamento_insulina">Tratamento com Insulina?</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="drogas_orais" name="drogas_orais">
+          <label class="form-check-label" for="drogas_orais">Drogas Orais</label>
+        </div>
+        <div class="mb-3">
+          <label for="doencas_associadas" class="form-label">Doenças Associadas</label>
+          <textarea class="form-control" id="doencas_associadas" name="doencas_associadas" rows="3"></textarea>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="historia_familiar" name="historia_familiar">
+          <label class="form-check-label" for="historia_familiar">História Familiar</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="controle_glicemico_inadequado" name="controle_glicemico_inadequado">
+          <label class="form-check-label" for="controle_glicemico_inadequado">
+            Controle Glicêmico Inadequado (HbA1c &gt; 7,0% em 3 exames)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="duracao_diabetes_maior_10" name="duracao_diabetes_maior_10">
+          <label class="form-check-label" for="duracao_diabetes_maior_10">
+            Duração do Diabetes (≥10 anos)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="idoso" name="idoso">
+          <label class="form-check-label" for="idoso">Idoso (&gt;60 anos)</label>
+        </div>
+      </fieldset>
+
+      <!-- Comorbidades e Exames -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="w-auto px-2">Comorbidades e Exames</legend>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="dislipidemia" name="dislipidemia">
+          <label class="form-check-label" for="dislipidemia">
+            Dislipidemia (hipercolesterolemia, hipertrigliceridemia e HDL-baixa)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="hipertensao_arterial" name="hipertensao_arterial">
+          <label class="form-check-label" for="hipertensao_arterial">Hipertensão Arterial</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="retinopatia" name="retinopatia">
+          <label class="form-check-label" for="retinopatia">
+            Retinopatia (pesquisar com fundoscopia)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="nefropatia" name="nefropatia">
+          <label class="form-check-label" for="nefropatia">
+            Nefropatia (pesquisar com albuminúria)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="obesidade" name="obesidade">
+          <label class="form-check-label" for="obesidade">Obesidade (IMC≥30 Kg/m²)</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="sedentarismo" name="sedentarismo">
+          <label class="form-check-label" for="sedentarismo">Sedentarismo</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="tabagismo" name="tabagismo">
+          <label class="form-check-label" for="tabagismo">Tabagismo</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="etilismo" name="etilismo">
+          <label class="form-check-label" for="etilismo">Etilismo</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="alta_estatura" name="alta_estatura">
+          <label class="form-check-label" for="alta_estatura">Alta Estatura</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="baixa_acuidade_visual" name="baixa_acuidade_visual">
+          <label class="form-check-label" for="baixa_acuidade_visual">Baixa Acuidade Visual</label>
+        </div>
+        <div class="mb-3">
+          <label for="fatores_psicossociais" class="form-label">Fatores Psicossociais (ex: negação da doença, baixo nível social, morar sozinho)</label>
+          <textarea class="form-control" id="fatores_psicossociais" name="fatores_psicossociais" rows="3"></textarea>
+        </div>
+      </fieldset>
+
+      <!-- Sintomas dos Pés e Membros Inferiores -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="w-auto px-2">Sintomas dos Pés e Membros Inferiores</legend>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="calcados_inadequados" name="calcados_inadequados">
+          <label class="form-check-label" for="calcados_inadequados">Calçados Inadequados e/ou Andar Descalço</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="queimacao_pes" name="queimacao_pes">
+          <label class="form-check-label" for="queimacao_pes">Sente Queimação nos Pés?</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="picadas_pernas_pes" name="picadas_pernas_pes">
+          <label class="form-check-label" for="picadas_pernas_pes">Tem Sensação de Picadas/Agulhadas em Pernas ou Pés?</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="dor_pior_noite" name="dor_pior_noite">
+          <label class="form-check-label" for="dor_pior_noite">Sente Dor nas Pernas ou Pés que Pioram à Noite?</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="alteracoes_sensitivas" name="alteracoes_sensitivas">
+          <label class="form-check-label" for="alteracoes_sensitivas">Sente Alterações Sensitivas nos Pés (ex.: em bota ou meias)?</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="dor_lancinante" name="dor_lancinante">
+          <label class="form-check-label" for="dor_lancinante">Sente Dor Lancinante nos Membros Inferiores?</label>
+        </div>
+        <div class="mb-3">
+          <label for="tempo_inicio_sintomas" class="form-label">Tempo Relacionado ao Início dos Sintomas Sensitivos (meses)</label>
+          <input type="number" class="form-control" id="tempo_inicio_sintomas" name="tempo_inicio_sintomas">
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="dormencia" name="dormencia">
+          <label class="form-check-label" for="dormencia">Sente Dormência nas Pernas ou Pés?</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="membro_morto" name="membro_morto">
+          <label class="form-check-label" for="membro_morto">Sente o Membro como se Estivesse "Morto"?</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="fraqueza_pernas" name="fraqueza_pernas">
+          <label class="form-check-label" for="fraqueza_pernas">Sente Cansaço ou Fraqueza nas Pernas?</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="pes_frios" name="pes_frios">
+          <label class="form-check-label" for="pes_frios">Sente os Pés Frios?</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="dor_repouso" name="dor_repouso">
+          <label class="form-check-label" for="dor_repouso">Tem Dor em Repouso nas Pernas ou Pés?</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="claudicacao_intermitente" name="claudicacao_intermitente">
+          <label class="form-check-label" for="claudicacao_intermitente">
+            Sente Dor ao Andar que Melhora com o Repouso (Claudicação Intermitente)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="ulcera_ou_amputacao" name="ulcera_ou_amputacao">
+          <label class="form-check-label" for="ulcera_ou_amputacao">
+            Já Teve Úlcera (Ferida Aberta) ou Amputação dos Pés?
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Dados Antropométricos e Pressão Arterial -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="w-auto px-2">Dados Antropométricos e Pressão Arterial</legend>
+        <div class="mb-3">
+          <label for="peso" class="form-label">Peso (Kg)</label>
+          <input type="number" step="0.1" class="form-control" id="peso" name="peso">
+        </div>
+        <div class="mb-3">
+          <label for="altura" class="form-label">Altura (m)</label>
+          <input type="number" step="0.01" class="form-control" id="altura" name="altura">
+        </div>
+        <div class="mb-3">
+          <label for="imc" class="form-label">IMC</label>
+          <input type="number" step="0.1" class="form-control" id="imc" name="imc">
+        </div>
+        <div class="mb-3">
+          <label for="pressao_arterial_bd" class="form-label">Pressão Arterial (mmHg) - Braço Direito</label>
+          <input type="text" class="form-control" id="pressao_arterial_bd" name="pressao_arterial_bd">
+        </div>
+        <div class="mb-3">
+          <label for="pressao_arterial_be" class="form-label">Pressão Arterial (mmHg) - Braço Esquerdo</label>
+          <input type="text" class="form-control" id="pressao_arterial_be" name="pressao_arterial_be">
+        </div>
+      </fieldset>
+
+      <!-- Avaliação da Pele e Estruturas dos Pés -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="w-auto px-2">Avaliação da Pele e Estruturas dos Pés</legend>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="pele_seca_descamativa" name="pele_seca_descamativa">
+          <label class="form-check-label" for="pele_seca_descamativa">Pele Seca e Descamativa</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="pele_hiperemia" name="pele_hiperemia">
+          <label class="form-check-label" for="pele_hiperemia">Pele com Vermelhidão (Hiperemia)</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="perda_unhas" name="perda_unhas">
+          <label class="form-check-label" for="perda_unhas">Perda das Unhas</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="calosidades" name="calosidades">
+          <label class="form-check-label" for="calosidades">Calosidades</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="fissuras_pes" name="fissuras_pes">
+          <label class="form-check-label" for="fissuras_pes">Fissuras nos Pés</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="anormalidade_sudorese" name="anormalidade_sudorese">
+          <label class="form-check-label" for="anormalidade_sudorese">Anormalidade na Sudorese dos Pés</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="edema" name="edema">
+          <label class="form-check-label" for="edema">Edema</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="pe_quente" name="pe_quente">
+          <label class="form-check-label" for="pe_quente">Pé Quente</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="ectasias_vasculares" name="ectasias_vasculares">
+          <label class="form-check-label" for="ectasias_vasculares">Ectasias Vasculares</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="pele_fria" name="pele_fria">
+          <label class="form-check-label" for="pele_fria">Pele Fria</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="pele_fina_brilhante" name="pele_fina_brilhante">
+          <label class="form-check-label" for="pele_fina_brilhante">Pele Fina e Brilhante</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="rarefacao_pelos" name="rarefacao_pelos">
+          <label class="form-check-label" for="rarefacao_pelos">Rarefação de Pêlos</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="unhas_distroficas" name="unhas_distroficas">
+          <label class="form-check-label" for="unhas_distroficas">Unhas Distróficas</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="palidez_cutanea" name="palidez_cutanea">
+          <label class="form-check-label" for="palidez_cutanea">Palidez Cutânea</label>
+        </div>
+        <!-- Avaliação da Cor dos Membros -->
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="cor_membro_elevado_palidez" name="cor_membro_elevado_palidez">
+          <label class="form-check-label" for="cor_membro_elevado_palidez">
+            Cor do Membro ao Elevar (Palidez)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="cor_membro_pendente" name="cor_membro_pendente">
+          <label class="form-check-label" for="cor_membro_pendente">
+            Cor do Membro Pendente (Rubor ou Cianose)
+          </label>
+        </div>
+        <!-- Outras Anormalidades -->
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="ulceras" name="ulceras">
+          <label class="form-check-label" for="ulceras">Úlceras</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="amputacoes" name="amputacoes">
+          <label class="form-check-label" for="amputacoes">Amputações</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="eritema" name="eritema">
+          <label class="form-check-label" for="eritema">Eritema</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="paroniquia" name="paroniquia">
+          <label class="form-check-label" for="paroniquia">
+            Inflamação da Dobra Ungueal (Paroníquia)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="bolhas" name="bolhas">
+          <label class="form-check-label" for="bolhas">Bolhas</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="micose_interdigital" name="micose_interdigital">
+          <label class="form-check-label" for="micose_interdigital">Micose Interdigital</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="onicomicose" name="onicomicose">
+          <label class="form-check-label" for="onicomicose">Onicomicose</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="dedos_anormais" name="dedos_anormais">
+          <label class="form-check-label" for="dedos_anormais">
+            Dedos em Garra, Martelo, etc.
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="forma_anormal_pe" name="forma_anormal_pe">
+          <label class="form-check-label" for="forma_anormal_pe">
+            Forma Anormal do Pé (pé cavo, plano, pé em gota, etc)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="pe_charcot" name="pe_charcot">
+          <label class="form-check-label" for="pe_charcot">Pé de Charcot</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="mobilidade_articular_alterada" name="mobilidade_articular_alterada">
+          <label class="form-check-label" for="mobilidade_articular_alterada">
+            Mobilidade Articular do Pé Alterada
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="sensibilidade_termica" name="sensibilidade_termica">
+          <label class="form-check-label" for="sensibilidade_termica">
+            Térmica (aplicação de água fria/aquecida)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="sensibilidade_dolorosa" name="sensibilidade_dolorosa">
+          <label class="form-check-label" for="sensibilidade_dolorosa">
+            Dolorosa (picada de agulha/palito no dorso do pé)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="sensibilidade_tatil" name="sensibilidade_tatil">
+          <label class="form-check-label" for="sensibilidade_tatil">
+            Tátil (algodão no dorso do pé)
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Salvar Informações</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- JS do Bootstrap (dependências Popper e Bootstrap JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

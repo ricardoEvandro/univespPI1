@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<script>
+        
+   function enviarDados() {
+        var dados = {
+        nome: document.getElementById("nome").value,
+        dataNascimento: document.getElementById("data_nascimento").value,
+        cpf: document.getElementById("cpf").value,
+        endereco: document.getElementById("endereco").value,
+        cnes: document.getElementById("CNES").value,
+        cargo: document.getElementById("cargo").value,
+        cargo_cbo: document.getElementById("cargo_cbo").value,
+        matricula: document.getElementById("matricula").value,
+        dataAdmissao: document.getElementById("dataAdmiss").value,
+        dataDemissao: document.getElementById("dataDemiss").value, //não faz sentido cadastrar a data de demissão: Desculpe pelo vacilo grupo kkkk
+        conselhoClasse: document.getElementById("cargo_cbo").value,
+        numConselhoClasse: document.getElementById("numConsClasse").value
+    };
+
+    // Envia os dados para o Apps Script
+    google.script.run
+        .withSuccessHandler(function(response) {
+            alert(response);
+            listarUsuario();
+        })
+        .salvarUsuario(dados);
+}
+
+function listarUsuario() {
+    google.script.run.withSuccessHandler(preencherTabela).listarUsuarios();
+}
+
+function preencherTabela(usuarios) {
+    let tabela = document.getElementById("tabela-corpo");
+    tabela.innerHTML = ""; // Limpa a tabela antes de inserir os novos dados
+    console.log(usuarios);
+
+    usuarios.forEach(usuario => {
+        let novaLinha = tabela.insertRow();
+        novaLinha.insertCell(0).textContent = usuario.nome;
+        novaLinha.insertCell(1).textContent = usuario.dataNascimento;
+        novaLinha.insertCell(2).textContent = usuario.cpf;
+        novaLinha.insertCell(3).textContent = usuario.endereco;
+        novaLinha.insertCell(4).textContent = usuario.cnes;
+        novaLinha.insertCell(5).textContent = usuario.cargo;
+        novaLinha.insertCell(6).textContent = usuario.cargo_cbo;
+        novaLinha.insertCell(7).textContent = usuario.matricula;
+        novaLinha.insertCell(8).textContent = usuario.dataAdmissao;
+        novaLinha.insertCell(9).textContent = usuario.dataDemissao;
+        novaLinha.insertCell(10).textContent = usuario.conselhoClasse;
+        novaLinha.insertCell(11).textContent = usuario.numConselhoClasse;
+    });
+}
+
+
+
+
+
+
+
+
+</script>
+
+</html>
